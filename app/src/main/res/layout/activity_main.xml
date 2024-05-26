@@ -13,9 +13,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         app:startIconDrawable="@drawable/baseline_search_24"
         android:background="#EDE8E8"
         app:shapeAppearance="?attr/shapeAppearanceCornerMedium"
@@ -27,7 +27,7 @@
             android:id="@+id/searchEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="dfgdgdgdf"
+            android:hint="Search"
             android:textColor="@color/black"/>
 
 
@@ -43,6 +43,7 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintStart_toStartOf="@id/searchInput"
         app:layout_constraintEnd_toEndOf="@id/searchInput"
+        tools:listitem="@layout/word_row_item"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 

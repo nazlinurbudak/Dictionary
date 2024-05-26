@@ -15,6 +15,7 @@ import com.nazlinurbudak.dictionary.common.observeTextChanges
 import com.nazlinurbudak.dictionary.common.okWith
 import com.nazlinurbudak.dictionary.common.viewBinding
 import com.nazlinurbudak.dictionary.databinding.ActivityMainBinding
+import com.nazlinurbudak.dictionary.ui.adapter.SearchAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
@@ -29,10 +30,13 @@ class MainActivity : AppCompatActivity() {
     private val binding by viewBinding(ActivityMainBinding::inflate)
 
     private val viewModel: MainViewModel by viewModels()
+    private val searchAdapter by lazy { SearchAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        setView()
         searchQuery()
         collectSearchQueryState()
     }
@@ -69,11 +73,18 @@ class MainActivity : AppCompatActivity() {
                         }
                         is WordUiState.Success -> {
                             Log.d("WORD" , it.data.toString())
+                            wordRecyclerView.visibility = View.VISIBLE
+                            searchAdapter.submitList(it.data)
                         }
                     }
                 }
         }
     }
+
+    private fun setView() = with(binding) {
+        wordRecyclerView.adapter = searchAdapter
+    }
+
 
 
     companion object {
